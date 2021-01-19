@@ -28,7 +28,7 @@ class RestResponseExceptionHandler
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
         ApiError apiError = ApiError.builder().status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .message(ex.getLocalizedMessage())
+            .message("Internal ERROR")
             .errors(List.of("Server Error")).build();
         return new ResponseEntity<Object>(
             apiError, new HttpHeaders(), apiError.getStatus());

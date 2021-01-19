@@ -12,7 +12,7 @@ This is a simple application that requests its data from [OpenWeather](https://o
 As the new engineer leading this project, your first task is to make it production-grade, feel free to refactor any piece
 necessary to achieve the goal.
 
-###Security Configuration
+### Security Configuration
 
 Initialy you will be requested to login in order to use the endpoint
 ```properties
@@ -20,7 +20,7 @@ user=user1
 password=user1Pass
 ```
 
-###Local Configuration
+### Local Configuration
 
 You will need to setup the following environment variables before you can run the program in your local environment
 ```properties
@@ -29,12 +29,12 @@ SPRING_DATASOURCE_PASSWORD=compose-postgres
 SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/compose-postgres
 TOKEN=WeatherApiToken
 ```
-###Cluster Configuration
+### Cluster Configuration
 
 With the repo there have been inlcluded 2 docker compose files one for the database pods
 and one for the endpoint microservice.
 
-###API Documentation
+### API Documentation
 
 You can have access to the documented endpoints here
 [api](http://localhost:8080/v3/api-docs/)

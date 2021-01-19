@@ -20,6 +20,13 @@ services:
       SPRING_DATASOURCE_PASSWORD: compose-postgres
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/compose-postgres
       TOKEN: TOKEN
+      CACHE_PORT: 6379
+      CACHE_HOST: cache
     depends_on:
       - db
-
+      - cache
+  cache:
+    image: "redis:alpine"
+    hostname: cache
+    ports:
+      - "6379:6379"
