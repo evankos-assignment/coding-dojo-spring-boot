@@ -24,20 +24,20 @@ password=user1Pass
 
 You will need to setup the following environment variables before you can run the program in your local environment
 ```properties
-SPRING_DATASOURCE_USERNAME=compose-postgres
-SPRING_DATASOURCE_PASSWORD=compose-postgres
-SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/compose-postgres
+POSTGRES_USER=compose-postgres
+POSTGRES_PASSWORD=compose-postgres
+POSTGRES_DB=compose-postgres
 TOKEN=WeatherApiToken
 ```
 ### Cluster Configuration
 
-With the repo there have been inlcluded 2 docker compose files one for the database pods
-and one for the endpoint microservice.
+Check the docker compose file for the configuration
+ of a balance loader, cache, database, and a scalable instance of app.
 
 ### API Documentation
 
 You can have access to the documented endpoints here
-[api](http://localhost:8080/v3/api-docs/)
+[api](https://localhost:8080/v3/api-docs/)
 
 ### How to deliver the code
 

@@ -3,30 +3,39 @@ version: '3'
 
 services:
   db:
-    image: "postgres"
+    image: postgres
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: compose-postgres
-      POSTGRES_USER: compose-postgres
-      POSTGRES_PASSWORD: compose-postgres
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
   app:
-    image: 'docker-spring-boot:latest'
+    image: docker-spring-boot:latest
     build: .
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
-      SPRING_DATASOURCE_USERNAME: compose-postgres
-      SPRING_DATASOURCE_PASSWORD: compose-postgres
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/compose-postgres
-      TOKEN: TOKEN
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+      TOKEN:
       CACHE_PORT: 6379
       CACHE_HOST: cache
     depends_on:
       - db
       - cache
   cache:
-    image: "redis:alpine"
-    hostname: cache
+    image: redis:alpine
     ports:
       - "6379:6379"
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./ngix.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl/:/ssl/:ro
+    depends_on:
+      - app
+    ports:
+      - "443:443"
+      - "80:80"

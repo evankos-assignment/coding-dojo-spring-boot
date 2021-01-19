@@ -10,7 +10,7 @@
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column  name="city"  type="varchar(255)">
-        <constraints nullable="false" unique="false"/>
+        <constraints nullable="false" unique="true"/>
       </column>
       <column  name="country"  type="varchar(255)">
         <constraints nullable="false" />
@@ -23,7 +23,7 @@
       indexName="idx_city"
       schemaName="public"
       tableName="weather"
-      unique="false">
+      unique="true">
       <column  descending="true"  name="city"/>
     </createIndex>
   </changeSet>

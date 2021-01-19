@@ -7,17 +7,12 @@ import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@EnableScheduling
-@Transactional
 @Slf4j
 public class WeatherService {
 
@@ -31,15 +26,11 @@ public class WeatherService {
   @Value("${weatherAPI}")
   private String weatherAPI;
 
-  @CacheEvict(allEntries = true, cacheNames = {"cities"})
-  @Scheduled(fixedDelay = 30000)
-  public void cacheEvict() {
-    log.info("Evicting Cache");
-  }
-
+  @Transactional
   @Cacheable(value = "cities", key = "#city.toLowerCase()")
   public WeatherEntity getCity(String city) {
     log.info("Searching for city: {}", city);
+    city = city.toLowerCase();
     CityWeatherModel weatherModel = weatherRestTemplate.getForObject(
         weatherAPI,
         CityWeatherModel.class, city, weatherToken);

@@ -5,3 +5,4 @@ ADD ${JAR_FILE} weather-service.jar
 
 # Run the jar
 ENTRYPOINT ["java", "-Dspring.profiles.active=pr","-jar","/weather-service.jar"]
+

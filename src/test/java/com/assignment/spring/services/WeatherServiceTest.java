@@ -26,7 +26,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {WeatherService.class, WeatherRepository.class})
+@SpringBootTest(classes = {WeatherService.class})
 @TestPropertySource("classpath:application-test.properties")
 public class WeatherServiceTest extends TestCase {
 
@@ -66,9 +66,9 @@ public class WeatherServiceTest extends TestCase {
     verify(weatherRestTemplate, times(1))
         .getForObject(urlCaptor.capture(), any(), cityCaptor.capture(), tokenCaptor.capture());
     assertEquals("WEATHER-URL?q={city}&APPID={weatherToken}", urlCaptor.getValue());
-    assertEquals(AMSTERDAM, cityCaptor.getValue());
+    assertEquals("amsterdam", cityCaptor.getValue());
     assertEquals("TOKEN", tokenCaptor.getValue());
-    assertEquals(AMSTERDAM, city.getCity());
+    assertEquals("amsterdam", city.getCity());
     assertEquals(NL, city.getCountry());
     assertEquals(TEMP, city.getTemperature());
   }
@@ -81,6 +81,6 @@ public class WeatherServiceTest extends TestCase {
         .getForObject(any(String.class), any(),
             any(String.class), any(String.class))).thenThrow(exception);
 
-    weatherService.getCity("Amstedam");
+    weatherService.getCity("amsterdam");
   }
 }
